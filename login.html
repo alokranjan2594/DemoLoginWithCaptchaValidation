@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Document</title>
+    <style>
+      body {
+        background: url("https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg");
+      }
+      .main {
+        max-width: 400px;
+        height: auto;
+        margin: auto;
+        padding: 40px;
+        margin-top: 200px;
+        background-color: beige;
+        /* box-shadow: 0, 0.5, 0; */
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 10px;
+      }
+      button {
+        background-color: #387cff;
+        color: white;
+        margin-top: 20px;
+      }
+      h1 {
+        color: #387cff;
+      }
+      .inline {
+        display: inline-block;
+      }
+      #btn {
+        background-color: #387cff;
+        color: white;
+        margin-top: 20px;
+      }
+      #image {
+        border: 1px solid black;
+        padding: 8px;
+        text-decoration: line-through;
+        font-style: italic;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+  <body onload="generate()">
+    <div class="card-body main">
+      <div class="mb-5 text-center">
+        <img src="" class="mw-100 mb-4" height="40" />
+        <h1 class="h3 mb-0">Welcome to Alok`s Portal</h1>
+        <p>Login to your account.</p>
+      </div>
+      <form class="pad-hor" method="POST" role="form" action="">
+        <!-- <input
+          type="hidden"
+          name="_token"
+          value="fXQwaH3Wf9uwAXy99MRrMCJosGJ6EmFKNQRAzwoa"
+        /> -->
+        <div class="form-group">
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            name="email"
+            value=""
+            required=""
+            autofocus=""
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            id="password"
+            type="password"
+            class="form-control"
+            name="password"
+            required=""
+            placeholder="Password"
+          />
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <div class="text-left">
+              <label class="aiz-checkbox">
+                <input type="checkbox" name="remember" id="remember" />
+                <span>Remember Me</span>
+                <span class="aiz-square-check"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="text-right">
+              <a href="" class="text-reset fs-14">Forgot password ?</a>
+            </div>
+          </div>
+        </div>
+        <div id="user-input" class="inline" style="margin: 20px">
+          <input type="text" id="submit" placeholder="Captcha code" />
+        </div>
+
+        <div class="inline" onclick="generate()">
+          <i class="fa fa-refresh"></i>
+        </div>
+
+        <div id="image" class="inline" selectable="False"></div>
+        <button type="submit" class="btn btn-lg btn-block" onclick="printmsg()">
+          Login
+        </button>
+
+        <!-- <input
+          type="submit"
+          id="btn"
+          class="btn btn-lg btn-block"
+          onclick="printmsg()"
+        /> -->
+      </form>
+    </div>
+
+    <script>
+      var captcha;
+      function generate() {
+        // Clear old input
+        document.getElementById("submit").value = "";
+
+        // Access the element to store
+        // the generated captcha
+        captcha = document.getElementById("image");
+        var uniquechar = "";
+
+        const randomchar =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        // Generate captcha for length of
+        // 5 with random character
+        for (let i = 1; i < 8; i++) {
+          uniquechar += randomchar.charAt(Math.random() * randomchar.length);
+        }
+
+        // Store generated input
+        captcha.innerHTML = uniquechar;
+      }
+      function printmsg() {
+        const usr_input = document.getElementById("submit").value;
+
+        // Check whether the input is equal
+        // to generated captcha or not
+        if (usr_input == captcha.innerHTML) {
+          alert("Captcha Matched");
+          generate();
+        } else {
+          alert("Captcha Not Matched");
+          generate();
+        }
+      }
+    </script>
+  </body>
+</html>
